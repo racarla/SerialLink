@@ -17,16 +17,26 @@ Currently, this library is limited to Teensy devices using Serial1, Serial2, or 
 Objects are already declared for you. Serial1Link is the object corresponding to using SerialLink over Serial1, Serial2Link for Serial2 and Serial3Link for Serial3.
 ## Setup Functions
 **begin(unsigned int baud)** Begin bus communication at the requested baud rate.
+
 **onReceive(function)** Callback function for handling received messages. The callback function should return a void and take an unsigned int as the only parameter, which provides the received packet size.
 ## Sending Functions
 **beginTransmission** Initializes a message to be sent.
+
 **write(unsigned char)** Writes a signle char to the transmit buffer.
-**write(unsigned char *, unsigned int len)** Writes a buffer to the transmit buffer, a pointer to the buffer should be given as well as the buffer length.
+
+**write(unsigned char &ast;, unsigned int len)** Writes a buffer to the transmit buffer, a pointer to the buffer should be given as well as the buffer length.
+
 **endTransmission()** Blocking method, sends the message and waits for an Ack response. Automatically resends the message until an Ack is received.
+
 **endTransmission(unsigned int timeout)** Blocking method, sends the message and waits for an Ack response. Times out after *timeout* microseconds if an Ack is not received. Automatically resends the message until an Ack is received or a timeout occurs.
+
 **sendTransmission()** Non blocking method, simply sends the message.
+
 **getTransmissionStatus()** checks the Ack status if using *sendTransmission()*. Returns true if an Ack response has been received.
 ## Reading Functions
+
 **available()** Returns the number of bytes available to read in the receive buffer.
+
 **read()** Reads a single byte from the receive buffer.
-**read(unsigned char *,unsigned int len)** Reads len bytes from the buffer placing the data in the buffer pointed to.
+
+**read(unsigned char &ast;,unsigned int len)** Reads len bytes from the buffer placing the data in the buffer pointed to.
